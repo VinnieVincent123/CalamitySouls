@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using CalamitySouls.Core.NPCMatching;
 
-namespace FargowiltasSouls.Core.NPCMatching.Conditions
+namespace CalamitySouls.Core.NPCMatching.Conditions
 {
     public class MatchTypeRangeCondition : INPCMatchCondition
     {

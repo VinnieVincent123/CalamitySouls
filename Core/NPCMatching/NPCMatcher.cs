@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CalamitySouls.Core.NPCMatching.Conditions;
+using CalamitySouls.Core.NPCMatching;
 
 namespace CalamitySouls.Core.NPCMatching
 {
