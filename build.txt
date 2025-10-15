@@ -1,4 +1,4 @@
-displayName = b
+displayName = Calamity: Souls of the World
 author = Mr. Callous
 version = 0.1
 modReferences = CalamityMod, NoxusBoss
