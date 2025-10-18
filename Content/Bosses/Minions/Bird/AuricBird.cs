@@ -1,6 +1,24 @@
+using System;
+using System.Linq;
+using Microsoft;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic;
+using Terraria;
+using Terraria.ID;
+using Terraria.Audio;
+using Terraria.ModLoader;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using CalamityMod;
+using CalamityMod.Buffs.DamageOverTime;
+using CalamityMod.Items.Potions;
+using NoxusBoss;
+using HeavenlyArsenal;
+using Luminance;
+using Daybreak;
 
-
-namespace CalamitySouls.Content.Bosses.Minions.AuricBird
+namespace CalamitySouls.Content.Bosses.Minions.Bird
 {
     public class AuricBird : ModNPC
     {
@@ -9,8 +27,6 @@ namespace CalamitySouls.Content.Bosses.Minions.AuricBird
             Main.npcFrameCount[Type] = 1;
 
             NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<MiracleBlight>()] = true;
-
-            this.ExcludeFromBestiary();
         }
 
         public override void SetDefaults()
@@ -29,7 +45,7 @@ namespace CalamitySouls.Content.Bosses.Minions.AuricBird
 
         }
 
-        public override AI()
+        public override void AI()
         {
             NPC.TargetClosest();
             Player player = Main.player[NPC.target];

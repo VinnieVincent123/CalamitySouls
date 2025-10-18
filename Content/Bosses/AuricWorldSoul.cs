@@ -17,6 +17,12 @@ using NoxusBoss;
 using HeavenlyArsenal;
 using Luminance;
 using Daybreak;
+using CalamitySouls.Content.Bosses.Minions.Bird;
+using CalamitySouls.Content.Bosses.Minions.Spider;
+using CalamitySouls.Content.Bosses.Minions.Horse;
+using CalamitySouls.Content.Bosses.Minions.Swine;
+using CalamitySouls.Content.Bosses.Minions.Worm;
+using CalamitySouls.Content.Bosses.Minions.Knights;
 
 
 namespace CalamitySouls.Content.Bosses
@@ -54,7 +60,7 @@ namespace CalamitySouls.Content.Bosses
             NPC.height = 5000;
             NPC.width = 3000;
             NPC.lifeMax = 4200000;
-            NPC.damage = 0;
+            NPC.damage = 1;
             NPC.defense = 897;
             NPC.Calamity().DR = 0.6f;
             NPC.aiStyle = -1;
@@ -66,7 +72,7 @@ namespace CalamitySouls.Content.Bosses
 
         }
 
-        public override AI()
+        public override void AI()
         {
             NPC.TargetClosest();
             Player player = Main.player[NPC.target];
@@ -145,7 +151,7 @@ namespace CalamitySouls.Content.Bosses
                     ai0: NPC.whoAmI
                 );
 
-                if (Main.netMode == NetModeID.Server && newNPC >= 0)
+                if (Main.netMode == NetmodeID.Server && newNPC >= 0)
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, newNPC);
 
                 for (int j = 0; j <20; j++)
@@ -171,17 +177,23 @@ namespace CalamitySouls.Content.Bosses
 
             NPC.dontTakeDamage = false;
 
-            NPC.Transform(ModContent.NPCType<AuricWorldSoulTrue>());            
+            int trueFormType = ModContent.NPCType<AuricWorldSoulTrue>();
+            NPC.Transform(trueFormType);
+
+            if (Main.netMode != NetmodeID.Server)
+            {
+                Main.musicFade[Main.curMusic] = 0;
+                Main.NewText("The Soul of The World reveals its true Form!", Color.Gold);
+                Main.PlaySound(SoundID.Roar, NPC.Center);
+                Main.musicFade[Main.curMusic] = 0;
+
+                Main.curMusic = MusicLoader.GetMusicSlot(Mod, "Assets/Music/AuricWorldSoul");
+            }         
         }
 
         private void HandlePhaseTwo()
         {
             //Just transform bro
-        }
-
-        public override void BossLoot(ref string name, ref int potionType)
-        {
-            potionType = ModContent.ItemType<OmegaHealingPotion>();
         }
 
         public override void OnKill()
